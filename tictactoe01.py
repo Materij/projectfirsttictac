@@ -1,4 +1,4 @@
-# указываем месторасположение наших ходов по цифрам на цифровой клавиатуре:
+# we indicate the location of our moves by the numbers on the numeric keypad:
 theBoard = {'7': ' ', '8': ' ', '9': ' ',
             '4': ' ', '5': ' ', '6': ' ',
             '1': ' ', '2': ' ', '3': ' '}
@@ -8,7 +8,8 @@ board_keys = []
 for key in theBoard:
     board_keys.append(key)
 
-# обновляем нашу игровую доску после каждого хода созданием функции:
+# we update our game board after each move
+# create functions
 def printBoard(board):
     print(board['7'] + '|' + board['8'] + '|' + board['9'])
     print('-+-+-')
@@ -17,14 +18,14 @@ def printBoard(board):
     print(board['1'] + '|' + board['2'] + '|' + board['3'])
 
 
-# основная функция с игрой будет выглядеть следующим образом:
+# the main function with the game will look like this:
 def game():
     turn = 'X'
     count = 0
 
     for i in range(10):
         printBoard(theBoard)
-        print("Твой ход, " + turn + ". Куда двигаться?")
+        print("Your turn, " + turn + ". Where to move?")
 
         move = input()
 
@@ -32,77 +33,77 @@ def game():
             theBoard[move] = turn
             count += 1
         else:
-            print("Эта клетка заполнена.\nКуда двигаться?")
+            print("This cell is filled.\nWhere to move?")
             continue
 
-        # проверка победителя после 5 ходов в игре:
+        # checking the winner after 5 moves in the game:
         if count >= 5:
-            if theBoard['7'] == theBoard['8'] == theBoard['9'] != ' ':  # заполена первая строка
+            if theBoard['7'] == theBoard['8'] == theBoard['9'] != ' ':  # first line filled
                 printBoard(theBoard)
-                print("\nИгра окончена.\n")
-                print(" **** " + turn + " победил. ****")
+                print("\nGame over.\n")
+                print(" **** " + turn + " won. ****")
                 break
-            elif theBoard['4'] == theBoard['5'] == theBoard['6'] != ' ':  # заполена вторая строка
+            elif theBoard['4'] == theBoard['5'] == theBoard['6'] != ' ':  # second line filled
                 printBoard(theBoard)
-                print("\nИгра окончена.\n")
-                print(" **** " + turn + " победил. ****")
+                print("\nGame over.\n")
+                print(" **** " + turn + " won. ****")
                 break
-            elif theBoard['1'] == theBoard['2'] == theBoard['3'] != ' ':  # заполена третья строка
+            elif theBoard['1'] == theBoard['2'] == theBoard['3'] != ' ':  # filled third line
                 printBoard(theBoard)
-                print("\nИгра окончена.\n")
-                print(" **** " + turn + " победил. ****")
+                print("\nGame over.\n")
+                print(" **** " + turn + " won. ****")
                 break
-            elif theBoard['1'] == theBoard['4'] == theBoard['7'] != ' ':  # заполнен первый столбец
+            elif theBoard['1'] == theBoard['4'] == theBoard['7'] != ' ':  # first column filled
                 printBoard(theBoard)
-                print("\nИгра окончена.\n")
-                print(" **** " + turn + " победил. ****")
+                print("\nGame over.\n")
+                print(" **** " + turn + " won. ****")
                 break
-            elif theBoard['2'] == theBoard['5'] == theBoard['8'] != ' ':  # заполнен второй столбец
+            elif theBoard['2'] == theBoard['5'] == theBoard['8'] != ' ':  # filled second column
                 printBoard(theBoard)
-                print("\nИгра окончена.\n")
-                print(" **** " + turn + " победил. ****")
+                print("\nGame over.\n")
+                print(" **** " + turn + " won. ****")
                 break
-            elif theBoard['3'] == theBoard['6'] == theBoard['9'] != ' ':  # заполнен третий столбец
+            elif theBoard['3'] == theBoard['6'] == theBoard['9'] != ' ':  # third column filled
                 printBoard(theBoard)
                 print("\nИгра окончена.\n")
-                print(" **** " + turn + " победил. ****")
+                print(" **** " + turn + " won. ****")
                 break
-            elif theBoard['7'] == theBoard['5'] == theBoard['3'] != ' ':  # заполнена одна диагональ
+            elif theBoard['7'] == theBoard['5'] == theBoard['3'] != ' ':  # the first diagonal is filled
                 printBoard(theBoard)
-                print("\nИгра окончена.\n")
-                print(" **** " + turn + " победил. ****")
+                print("\nGame over.\n")
+                print(" **** " + turn + " won. ****")
                 break
-            elif theBoard['1'] == theBoard['5'] == theBoard['9'] != ' ':  # заполнена вторая диагональ
+            elif theBoard['1'] == theBoard['5'] == theBoard['9'] != ' ':  # the second diagonal is filled
                 printBoard(theBoard)
-                print("\nИгра окончена.\n")
-                print(" **** " + turn + " победил. ****")
+                print("\nGame over.\n")
+                print(" **** " + turn + " won. ****")
                 break
 
-                # Если победитель так и не выявлен после девятого хода, тогда объявляем ничью:
+                # If the winner is still not revealed after the ninth move, then we declare a draw:
         if count == 9:
-            print("\nИгра окончена.\n")
-            print("Ничья в игре!!")
+            print("\nGame over.\n")
+            print("Draw in game!!")
 
-        # осуществляем с помощью инструкции смену игроков после каждого хода:
+        # we use the instruction to change players after each move:
         if turn == 'X':
             turn = 'O'
         else:
             turn = 'X'
 
-            # вопрос о перезапуске игры:
-    restart = input("Хотите повторить игру?(y/n)")
+            # game restart question:
+    restart = input("Do you want to repeat the game??(y/n)")
     if restart == "y" or restart == "Y":
         for key in board_keys:
             theBoard[key] = " "
 
         game()
 
-# когда интерпретатор Python читает исходный файл,
-# он исполняет весь найденный в нем код. Перед тем, как начать выполнять команды,
-# он определяет несколько специальных переменных. Например,
-# если интерпретатор запускает некоторый модуль (исходный файл) как основную программу,
-# он присваивает специальной переменной __name__ значение "__main__".
-# Если этот файл импортируется из другого модуля, переменной __name__ будет присвоено имя этого модуля.
-# простыми словами: Переменная __name__ равна __main__ только в точке входа в программу - в скрипте переданном интерпретатору при запуске:
+# when the python interpreter reads the source file,
+# it executes all the code found in it. Before you start executing commands,
+# it defines a few special variables. For example,
+# if the interpreter runs some module (source file) as the main program,
+# it assigns to the special variable __name__ value "__main__".
+# If this file is imported from another module, the variable __name__ will be assigned the name of this module.
+# speaking in simple words: the variable __name__ is equal to __main__ only at the entry point to the program - in the script passed to the interpreter at startup:
 if __name__ == "__main__":
     game()
